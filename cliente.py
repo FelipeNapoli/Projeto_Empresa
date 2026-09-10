@@ -11,5 +11,15 @@ def cadastro_cliente():
             elif not nome.replace(" ","").isalpha():
                 raise ValueError
 
+            else:
+                break
+
         except ValueError:
             print("Nome inválido, tente novamente")
+
+    while True:
+        try:
+            email = input("Digite o email: ")
+            
+        except ValueError:
+            print("Email inválido")
