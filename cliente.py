@@ -36,5 +36,8 @@ def cadastro_cliente():
             if 10 > len(telefone) > 11:
                 raise ValueError
 
+            else:
+                break
+
         except ValueError:
             print("Numero de telefone inválido")
