@@ -123,4 +123,10 @@ def listar_produto():
 
                 print(f"{'NOME':<25} {'PREÇO':<12} {'QUANTIDADE':<12}")
                 print("-" * 48)
-                
+
+                for nome, preco, quantidade in produtos:
+                    print(
+                        f"{nome:<25}"
+                        f"R$ {preco:<9.2f}"
+                        f"{quantidade:<12}"
+                    )
