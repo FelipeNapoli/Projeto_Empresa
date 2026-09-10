@@ -86,4 +86,8 @@ def cadastro_produto():
         print("Não foi possível cadastrar o produto")
 
 def listar_produto():
-    
+    print("\n --- PRODUTOS CADASTRADOS ---")
+
+    if not os.path.exists(ARQUIVO):
+        print("Nenhum produto cadastrado.")
+        return
