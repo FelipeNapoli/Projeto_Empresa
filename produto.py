@@ -104,7 +104,7 @@ def listar_produto():
                 if not linha:
                     continue
 
-                dados = linhas.split(";")
+                dados = linha.split(";")
 
                 if len(dados) != 3:
                     print("Existe uma linha inválida no arquivo!")
@@ -130,3 +130,8 @@ def listar_produto():
                         f"R$ {preco:<9.2f}"
                         f"{quantidade:<12}"
                     )
+
+    except (OSError, ValueError):
+        print("Não foi possível ler os produtos cadastrados.")
+
+        
