@@ -116,3 +116,7 @@ def listar_produto():
                 quantidade = int(quantidade)
 
                 produtos.append((nome, preco, quantidade))
+
+                if not produtos:
+                        print("Nenhum produto cadastrado.")
+                        return
