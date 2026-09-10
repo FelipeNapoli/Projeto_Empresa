@@ -95,4 +95,24 @@ def listar_produto():
     try:
         produtos = []
 
-    
+        with open(ARQUIVO, "r", encoding="utf-8") as arquivo:
+
+            for linha in arquivo:
+
+                linha = linha.strip()
+
+                if not linha:
+                    continue
+
+                dados = linhas.split(";")
+
+                if len(dados) != 3:
+                    print("Existe uma linha inválida no arquivo!")
+                    return
+
+                nome, preco, quantidade = dados
+
+                preco = float(preco)
+                quantidade = int(quantidade)
+
+                produtos.append((nome, preco, quantidade))
