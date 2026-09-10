@@ -37,4 +37,20 @@ def cadastro_produto():
         except ValueError:
             print("Preço inválido! Digite somente números.")
 
+
+    while True:
+
+        try:
+            quantidade = int(input("Informe a quantidade do produto: "))
+
+            if quantidade <= 0:
+                print("Quantidade inválida! Digite um número inteiro maior que zero.")
+
+                continue
+
+            break
+
+        except ValueError:
+            print("Quantidade inválida! Digite um número inteiro.4")
+
     
