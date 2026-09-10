@@ -9,15 +9,11 @@ def cadastro_produto():
 
         nome = input("Nome do produto: ").strip()
 
-        if nome == "":
-            print("O nome não pode ficar vazio.")
-            continue
-
         if not nome:
             print("Nome inválido. Tente novamente")
             continue
 
-        if not nome.isalpha():
+        if not nome.replace(" ", "").isalpha():
             print("Nome inválido. Digite apenas letras.")
             continue
 
@@ -26,7 +22,7 @@ def cadastro_produto():
     while True:
 
         try:
-            preco = float(input("Preço do produto: R$")).strip().replace("," , ".")
+            preco = float(input("Preço do produto: R$ ").strip().replace("," , "."))
 
             if preco <= 0:
                 print("Preço inválido! Tente Novamente.")
@@ -117,21 +113,20 @@ def listar_produto():
 
                 produtos.append((nome, preco, quantidade))
 
-                if not produtos:
+            if not produtos:
                         print("Nenhum produto cadastrado.")
                         return
 
-                print(f"{'NOME':<25} {'PREÇO':<12} {'QUANTIDADE':<12}")
-                print("-" * 48)
+            print(f"{'NOME':<25} {'PREÇO':<12} {'QUANTIDADE':<12}")
+            print("-" * 48)
 
-                for nome, preco, quantidade in produtos:
-                    print(
-                        f"{nome:<25}"
-                        f"R$ {preco:<9.2f}"
-                        f"{quantidade:<12}"
-                    )
+            for nome, preco, quantidade in produtos:
+                print(
+                    f"{nome:<25}"
+                    f"R$ {preco:<9.2f}"
+                    f"{quantidade:<12}"
+                )
 
     except (OSError, ValueError):
         print("Não foi possível ler os produtos cadastrados.")
 
-        
