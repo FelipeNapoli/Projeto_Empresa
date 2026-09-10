@@ -120,3 +120,7 @@ def listar_produto():
                 if not produtos:
                         print("Nenhum produto cadastrado.")
                         return
+
+                print(f"{'NOME':<25} {'PREÇO':<12} {'QUANTIDADE':<12}")
+                print("-" * 48)
+                
