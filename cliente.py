@@ -31,9 +31,10 @@ def cadastro_cliente():
 
     while True:
         try:
-            telefone = int(input("Digite seu numero de telefone: "))
+            telefone = input("Digite seu numero de telefone: ")
+            digitos = telefone.replace(" ", "").replace("-", "").replace("(", "").replace(")", "")
 
-            if 10 > len(telefone) > 11:
+            if not (10 <= len(digitos) <= 12):
                 raise ValueError
 
             else:
