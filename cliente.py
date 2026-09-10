@@ -20,6 +20,11 @@ def cadastro_cliente():
     while True:
         try:
             email = input("Digite o email: ")
-            
+            if not "@" in email:
+                raise ValueError
+
+            else:
+                break
+
         except ValueError:
             print("Email inválido")
