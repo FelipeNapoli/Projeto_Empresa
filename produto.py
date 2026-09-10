@@ -91,3 +91,8 @@ def listar_produto():
     if not os.path.exists(ARQUIVO):
         print("Nenhum produto cadastrado.")
         return
+
+    try:
+        produtos = []
+
+    
