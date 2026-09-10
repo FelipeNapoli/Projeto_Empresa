@@ -3,7 +3,7 @@ import os
 ARQUIVO = "produtos.txt"    
 
 def cadastro_produto():
-    print("\n --- CADASTRAR PRODUTO---")
+    print("\n --- CADASTRAR PRODUTO ---")
 
     while True:
 
@@ -84,3 +84,6 @@ def cadastro_produto():
 
     except OSError:
         print("Não foi possível cadastrar o produto")
+
+def listar_produto():
+    
