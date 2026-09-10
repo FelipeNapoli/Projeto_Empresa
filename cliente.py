@@ -28,3 +28,10 @@ def cadastro_cliente():
 
         except ValueError:
             print("Email inválido")
+
+    while True:
+        try:
+            telefone = int(input("Digite seu numero de telefone: "))
+
+        except ValueError:
+            print("Numero de telefone inválido")
