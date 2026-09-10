@@ -9,6 +9,10 @@ def cadastro_produto():
 
         nome = input("Nome do produto: ").strip()
 
+        if nome == "":
+            print("O nome não pode ficar vazio.")
+            continue
+
         if not nome:
             print("Nome inválido. Tente novamente")
             continue
@@ -18,3 +22,19 @@ def cadastro_produto():
             continue
 
         break
+
+    while True:
+
+        try:
+            preco = float(input("Preço do produto: R$")).strip().replace("," , ".")
+
+            if preco <= 0:
+                print("Preço inválido! Tente Novamente.")
+                continue
+
+            break
+
+        except ValueError:
+            print("Preço inválido! Digite somente números.")
+
+    
