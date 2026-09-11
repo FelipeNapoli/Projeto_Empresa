@@ -75,6 +75,8 @@ def cadastro_cliente():
             telefone = input(" ").strip()
             digitos = telefone.replace(" ", "").replace("-", "").replace("(", "").replace(")", "")
 
+            int(digitos)
+
             if not (10 <= len(digitos) <= 12):
                 raise ValueError
 
@@ -268,3 +270,5 @@ def excluir_cliente():
             border_style= "red",
             width = 80
         ))
+
+cadastro_cliente()
