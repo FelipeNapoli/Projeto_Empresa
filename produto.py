@@ -3,21 +3,28 @@ from colorama import Fore, Style, init
 
 init(autoreset=True)
 
+def caixa(texto, cor=Fore.CYAN, largura=50):
+    linhas = texto.split("\n")
+    print(cor + "┌" + "─" * (largura - 2) + "┐")
+    for linha in linhas:
+        print(cor + "│" + Style.BRIGHT + linha.center(largura - 2) + Style.NORMAL + cor + "│")
+    print(cor + "└" + "─" * (largura - 2) + "┘")
+
 ARQUIVO = "produtos.txt"    
 
 def cadastro_produto():
-    print("\n --- CADASTRAR PRODUTO ---")
+    caixa("CADASTRAR PRODUTO", Fore.CYAN)
 
     while True:
 
-        nome = input("Nome do produto: ").strip()
+        nome = input(Fore.MAGENTA + Style.BRIGHT + "\nNome do produto: " + Style.RESET_ALL).strip()
 
         if not nome:
-            print("Nome inválido. Tente novamente")
+            print(Fore.RED + "Nome inválido. Tente novamente")
             continue
 
         if not nome.replace(" ", "").isalpha():
-            print("Nome inválido. Digite apenas letras.")
+            print(Fore.RED +"Nome inválido. Digite apenas letras.")
             continue
 
         break
@@ -25,32 +32,32 @@ def cadastro_produto():
     while True:
 
         try:
-            preco = float(input("Preço do produto: R$ ").strip().replace("," , "."))
+            preco = float(input(Fore.MAGENTA + Style.BRIGHT + "Preço do produto: R$ ").strip().replace("," , "."))
 
             if preco <= 0:
-                print("Preço inválido! Tente Novamente.")
+                print(Fore.RED + "Preço inválido! Tente Novamente.")
                 continue
 
             break
 
         except ValueError:
-            print("Preço inválido! Digite somente números.")
+            print(Fore.RED + "Preço inválido! Digite somente números.")
 
 
     while True:
 
         try:
-            quantidade = int(input("Informe a quantidade do produto: "))
+            quantidade = int(input(Fore.MAGENTA + Style.BRIGHT +"Informe a quantidade do produto: "))
 
             if quantidade <= 0:
-                print("Quantidade inválida! Digite um número inteiro maior que zero.")
+                print(Fore.RED + "Quantidade inválida! Digite um número inteiro maior que zero.")
 
                 continue
 
             break
 
         except ValueError:
-            print("Quantidade inválida! Digite um número inteiro.")
+            print(Fore.RED + "Quantidade inválida! Digite um número inteiro.")
 
     try:
         if os.path.exists(ARQUIVO):
@@ -66,29 +73,32 @@ def cadastro_produto():
                     dados = linha.split(";")
 
                     if len(dados) != 3:
-                        print("Existe uma linha inválida no arquivo.")
+                        print(Fore.RED + "Existe uma linha inválida no arquivo.")
                         return
 
                     nome_cadastrado, preco_cadastrado, quantidade_cadastrada = dados
 
                     if nome_cadastrado.lower() == nome.lower():
-                        print("Esse produto já está cadastrado.")
+                        print(Fore.RED +"Esse produto já está cadastrado.")
                         return
 
         with open(ARQUIVO, "a", encoding="utf-8") as arquivo:
             arquivo.write(f"{nome};{preco:.2f};{quantidade}\n")
 
-        print("== PRODUTO CADASTRADO ==")
-        print("Produto cadastrado com sucesso!")
+        caixa("PRODUTO CADASTRADO", Fore.GREEN)
+        print(Fore.YELLOW + f"Nome: {Style.BRIGHT}{nome}")
+        print(Fore.YELLOW + f"Preço: {Style.BRIGHT}R$ {preco:.2f}")
+        print(Fore.YELLOW + f"Quantidade: {Style.BRIGHT}{quantidade}")
+        print(Fore.GREEN + "Produto cadastrado com sucesso!")
 
     except OSError:
         print("Não foi possível cadastrar o produto")
 
 def listar_produto():
-    print("\n --- PRODUTOS CADASTRADOS ---")
+    caixa("PRODUTOS CADASTRADOS", Fore.CYAN)
 
     if not os.path.exists(ARQUIVO):
-        print("Nenhum produto cadastrado.")
+        print(Fore.RED + "Nenhum produto cadastrado.")
         return
 
     try:
@@ -106,7 +116,7 @@ def listar_produto():
                 dados = linha.split(";")
 
                 if len(dados) != 3:
-                    print("Existe uma linha inválida no arquivo!")
+                    print(Fore.RED + "Existe uma linha inválida no arquivo!")
                     return
 
                 nome, preco, quantidade = dados
@@ -117,40 +127,40 @@ def listar_produto():
                 produtos.append((nome, preco, quantidade))
 
             if not produtos:
-                        print("Nenhum produto cadastrado.")
+                        print(Fore.RED + "Nenhum produto cadastrado.")
                         return
 
-            print(f"{'NOME':<25} {'PREÇO':<12} {'QUANTIDADE':<12}")
-            print("-" * 48)
+            print(Fore.BLUE + Style.BRIGHT + f"{'NOME':<25} {'PREÇO':<12} {'QUANTIDADE':<12}")
+            print(Fore.CYAN + "-" * 48)
 
             for nome, preco, quantidade in produtos:
                 print(
-                    f"{nome:<25}"
-                    f"R$ {preco:<9.2f}"
-                    f"{quantidade:<12}"
+                    Fore.WHITE + Style.BRIGHT + f"{nome:<25}"
+                    + Fore.YELLOW + f"R$ {preco:<9.2f}"
+                    + Fore.YELLOW + f"{quantidade:<12}"
                 )
 
     except (OSError, ValueError):
-        print("Não foi possível ler os produtos cadastrados.")
+        print(Fore.RED + "Não foi possível ler os produtos cadastrados.")
 
 def excluir_produto():
 
       while True:
 
-        print("\n --- EXCLUIR PRODUTO ---")
+        caixa("EXCLUIR PRODUTO", Fore.CYAN)
 
         if not os.path.exists(ARQUIVO):
-            print("Nenhum produto cadastrado.")
+            print(Fore.RED + "Nenhum produto cadastrado.")
             return
 
-        nome_excluir = input("Digite o nome do produto que deseja excluir: ").strip()
+        nome_excluir = input(Fore.MAGENTA + Style.BRIGHT + "\nDigite o nome do produto que deseja excluir: ").strip()
 
         if not nome_excluir:
-            print("Nome inválido.")
+            print(Fore.RED + "Nome inválido.")
             continue
 
         if not nome_excluir.replace(" ", "").isalpha():
-            print("Nome inválido. Digite apenas letras.")
+            print(Fore.RED +"Nome inválido. Digite apenas letras.")
             continue
 
         try:
@@ -170,7 +180,7 @@ def excluir_produto():
                     dados = linha.split(";")
 
                     if len(dados) != 3:
-                        print("Existe uma linha inválida no arquivo!")
+                        print(Fore.RED + "Existe uma linha inválida no arquivo!")
                         return
 
                     nome, preco, quantidade = dados
@@ -182,7 +192,7 @@ def excluir_produto():
                     produtos.append(linha)
 
             if not encontrado:
-                print("Produto não encontrado.")
+                print(Fore.RED + "Produto não encontrado.")
                 continue
 
             with open(ARQUIVO, "w", encoding="utf-8") as arquivo:
@@ -190,12 +200,12 @@ def excluir_produto():
                 for produto in produtos:
                     arquivo.write(produto + "\n")
 
-            print(" === PRODUTO EXCLUÍDO ===")
-            print("Produto excluído com sucesso!")
+            caixa("PRODUTO EXCLUÍDO", Fore.GREEN)
+            print(Fore.GREEN + "Produto excluído com sucesso!")
 
             break
 
         except OSError:
-            print("Não foi possível excluir o produto.")
+            print(Fore.RED + "Não foi possível excluir o produto.")
             break
 
