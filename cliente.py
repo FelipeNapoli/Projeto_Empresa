@@ -4,7 +4,7 @@ from rich.table import Table
 from rich import box
 import os
 
-arquivo = "clientes.txt"
+arquivo = r"clientes.txt"
 
 def cadastro_cliente():
     print(Panel(
@@ -92,6 +92,9 @@ def cadastro_cliente():
                 )
             )
 
+    with open(arquivo, "w", encoding="utf-8") as txt:
+        txt.write(f"{nome};{email};{telefone}\n")
+
     print()
     print()
     print(
@@ -103,5 +106,6 @@ def cadastro_cliente():
         )
     )
     print(f"\n [orange1]Nome:[/] {nome}\n\n [orange1]Email:[/] {email}\n\n [orange1]Telefone:[/] {telefone}")
+
 
 cadastro_cliente()
