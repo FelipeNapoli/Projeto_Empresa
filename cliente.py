@@ -92,7 +92,7 @@ def cadastro_cliente():
                 )
             )
 
-    with open(arquivo, "w", encoding="utf-8") as txt:
+    with open(arquivo, "a", encoding="utf-8") as txt:
         txt.write(f"{nome};{email};{telefone}\n")
 
     print()
@@ -107,8 +107,36 @@ def cadastro_cliente():
     )
     print(f"\n [orange1]Nome:[/] {nome}\n\n [orange1]Email:[/] {email}\n\n [orange1]Telefone:[/] {telefone}")
 
+
 def listar_clientes():
     try:
+        print()
+        print()
+        print(Panel(
+            "CLIENTES CADASTRADOS",
+            box = box.DOUBLE,
+            border_style = "bright_blue",
+            width = 80,
+            padding = (0, 29)
+
+        )
+
+        )
+        tabela = Table(
+            caption = "EMPRESA+",
+            caption_style= "dim italic #000a9b",
+            title_style = "bold white on dark_blue",
+            border_style="bright_blue",
+            box = box.ROUNDED,
+            style = "cyan",
+            width = 80,
+            show_lines= True
+            )
+
+        tabela.add_column("NOME", justify = "center", style="bold white")
+        tabela.add_column("EMAIL", justify = "center", style="italic magenta")
+        tabela.add_column("TELEFONE", justify = "center", style="yellow")
+
         if os.path.exists(arquivo):
             with open(arquivo, "r", encoding = "utf-8") as txt:
                 clientes = txt.readlines()
@@ -121,6 +149,11 @@ def listar_clientes():
                 email = dados[1]
                 telefone = dados[2]
 
+                tabela.add_row(nome, email, telefone)
+
+            print(tabela)
+            print()
+
         else:
             raise FileNotFoundError
         
@@ -132,6 +165,3 @@ def listar_clientes():
             border_style= "red"
 
         ))
-        
-
-cadastro_cliente()
