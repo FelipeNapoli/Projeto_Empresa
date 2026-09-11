@@ -18,7 +18,8 @@ def cadastro_cliente():
 
     while True:
         try:
-            nome = input(" Digite seu nome: ")
+            print(" [dodger_blue1]Digite seu nome: ")
+            nome = input(" ")
 
             if not nome:
                 raise ValueError
@@ -30,13 +31,23 @@ def cadastro_cliente():
                 break
 
         except ValueError:
-            print(" Nome inválido, tente novamente")
+            print()
+            print(Panel(
+                "[dark_red]Nome Inválido[/]", 
+                box=box.HORIZONTALS, 
+                expand=False, 
+                padding=(0, 2),
+                border_style="red"
+                )
+            )
+            print()
 
     print()
 
     while True:
         try:
-            email = input(" Digite o email: ")
+            print(" [blue_violet]Digite o email: [/]")
+            email = input(" ")
             if not "@" in email:
                 raise ValueError
 
@@ -44,13 +55,23 @@ def cadastro_cliente():
                 break
 
         except ValueError:
-            print(" Email inválido")
+            print()
+            print(Panel(
+                "[dark_red]Email Inválido[/]", 
+                box=box.HORIZONTALS, 
+                expand=False, 
+                padding=(0, 2),
+                border_style="red"
+                )
+            )
+            print()
 
     print()        
 
     while True:
         try:
-            telefone = input(" Digite seu numero de telefone: ")
+            print(" [medium_violet_red]Digite seu numero de telefone: [/]")
+            telefone = input(" ")
             digitos = telefone.replace(" ", "").replace("-", "").replace("(", "").replace(")", "")
 
             if not (10 <= len(digitos) <= 12):
@@ -60,7 +81,16 @@ def cadastro_cliente():
                 break
 
         except ValueError:
-            print(" Numero de telefone inválido")
+            print()
+            print(Panel(
+                "[dark_red]Telefone Inválido[/]", 
+                box=box.HORIZONTALS, 
+                expand=False, 
+                padding=(0, 2),
+                border_style="red"
+                )
+            )
+            print()
     
 
 cadastro_cliente()
