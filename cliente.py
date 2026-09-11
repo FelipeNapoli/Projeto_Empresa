@@ -20,7 +20,7 @@ def cadastro_cliente():
     while True:
         try:
             print(" [dodger_blue1]Digite seu nome: ")
-            nome = input(" ")
+            nome = input(" ").strip().title()
 
             if not nome:
                 raise ValueError
@@ -48,7 +48,7 @@ def cadastro_cliente():
     while True:
         try:
             print(" [blue_violet]Digite o email: [/]")
-            email = input(" ")
+            email = input(" ").lower().strip()
             if not "@" in email:
                 raise ValueError
 
@@ -72,7 +72,7 @@ def cadastro_cliente():
     while True:
         try:
             print(" [medium_violet_red]Digite seu numero de telefone: [/]")
-            telefone = input(" ")
+            telefone = input(" ").strip()
             digitos = telefone.replace(" ", "").replace("-", "").replace("(", "").replace(")", "")
 
             if not (10 <= len(digitos) <= 12):
@@ -93,7 +93,7 @@ def cadastro_cliente():
             )
 
     with open(arquivo, "a", encoding="utf-8") as txt:
-        txt.write(f"{nome.title()};{email};{telefone}\n")
+        txt.write(f"{nome.title()};{email.lower()};{telefone}\n")
 
     print()
     print()
@@ -231,7 +231,6 @@ def excluir_cliente():
                             break
 
                     else:
-                        print("caiu")
                         raise NameError
 
                     break
