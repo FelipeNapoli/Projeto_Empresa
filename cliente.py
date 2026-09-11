@@ -118,10 +118,8 @@ def listar_clientes():
             border_style = "bright_blue",
             width = 80,
             padding = (0, 29)
+        ))
 
-        )
-
-        )
         tabela = Table(
             caption = "EMPRESA+",
             caption_style= "dim italic #000a9b",
@@ -162,6 +160,64 @@ def listar_clientes():
             "Nenhum Cliente Cadastrado",
             expand = False,
             title_align= "center",
-            border_style= "red"
-
+            border_style= "red",
+            width = 80
         ))
+
+
+def excluir_cliente():
+    try:
+        print()
+        print()
+        print(Panel(
+            "EXCLUIR CLIENTES",
+            box = box.DOUBLE,
+            border_style = "bright_red",
+            width = 80,
+            padding = (0, 31)
+        ))
+
+        tabela = Table(
+            caption = "EMPRESA+",
+            caption_style= "dim italic #000a9b",
+            title_style = "bold white on dark_red",
+            border_style="bright_red",
+            box = box.ROUNDED,
+            style = "bright_red",
+            width = 80,
+            show_lines= True
+            )
+
+        tabela.add_column("NOME", justify = "center", style="bold white")
+        tabela.add_column("EMAIL", justify = "center", style="italic magenta")
+        tabela.add_column("TELEFONE", justify = "center", style="yellow")
+
+        if os.path.exists(arquivo):
+            with open(arquivo, "r", encoding = "utf-8") as txt:
+                clientes = txt.readlines()
+
+        clientes.sort()
+
+        for cliente in clientes:
+            dados = cliente.strip().split(";")
+            nome = dados[0]
+            email = dados[1]
+            telefone = dados[2]
+
+            tabela.add_row(nome, email, telefone)
+
+        print(tabela)
+        print()
+        
+
+    except FileNotFoundError:
+        print(Panel(
+            "Nenhum Cliente Cadastrado",
+            expand = False,
+            title_align= "center",
+            border_style= "red",
+            width = 80
+        ))
+
+listar_clientes()
+excluir_cliente()
