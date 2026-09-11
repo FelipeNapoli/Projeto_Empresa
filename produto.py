@@ -1,4 +1,7 @@
 import os
+from colorama import Fore, Style, init
+
+init(autoreset=True)
 
 ARQUIVO = "produtos.txt"    
 
@@ -132,58 +135,67 @@ def listar_produto():
 
 def excluir_produto():
 
-    print("\n --- EXCLUIR PRODUTO ---")
+      while True:
 
-    if not os.path.exists(ARQUIVO):
-        print("Nenhum produto cadastrado.")
-        return
+        print("\n --- EXCLUIR PRODUTO ---")
 
-    nome_excluir = input("Digite o nome do produto que deseja excluir.").strip()
+        if not os.path.exists(ARQUIVO):
+            print("Nenhum produto cadastrado.")
+            return
 
-    if not nome_excluir:
-        print("Nome inválido.")
-        return
+        nome_excluir = input("Digite o nome do produto que deseja excluir: ").strip()
 
-    if not nome_excluir.replace(" ", "").isalpha():
-        print("Nome inválido. Digite apenas letras.")
-        return
+        if not nome_excluir:
+            print("Nome inválido.")
+            continue
 
-    try:
-        produtos = []
-        encontrado = False
+        if not nome_excluir.replace(" ", "").isalpha():
+            print("Nome inválido. Digite apenas letras.")
+            continue
 
-        with open(ARQUIVO, "r", encoding="utf-8") as arquivo:
-            for linha in arquivo:
+        try:
 
-                linha = linha.strip()
+            produtos = []
+            encontrado = False
 
-                if not linha:
-                    continue
+            with open(ARQUIVO, "r", encoding="utf-8") as arquivo:
 
-                dados = linha.split(";")
+                for linha in arquivo:
 
-                if len(dados) != 3:
-                    print("Existe uma linha inválida no arquivo!")
-                    return
+                    linha = linha.strip()
 
-                nome, preco, quantidade = dados
+                    if not linha:
+                        continue
 
-                if nome.lower() == nome_excluir.lower():
-                    encontrado = True
-                    continue
+                    dados = linha.split(";")
 
-                produtos.append(linha)
+                    if len(dados) != 3:
+                        print("Existe uma linha inválida no arquivo!")
+                        return
+
+                    nome, preco, quantidade = dados
+
+                    if nome.lower() == nome_excluir.lower():
+                        encontrado = True
+                        continue
+
+                    produtos.append(linha)
 
             if not encontrado:
                 print("Produto não encontrado.")
-                return
+                continue
 
-            with open(ARQUIVO, "w", encoding = "utf-8") as arquivo:
+            with open(ARQUIVO, "w", encoding="utf-8") as arquivo:
+
                 for produto in produtos:
                     arquivo.write(produto + "\n")
 
             print(" === PRODUTO EXCLUÍDO ===")
             print("Produto excluído com sucesso!")
 
-    except OSError:
-        print("Não foi possível excluir o produto")
+            break
+
+        except OSError:
+            print("Não foi possível excluir o produto.")
+            break
+
