@@ -131,3 +131,59 @@ def listar_produto():
         print("Não foi possível ler os produtos cadastrados.")
 
 def excluir_produto():
+
+    print("\n --- EXCLUIR PRODUTO ---")
+
+    if not os.path.exists(ARQUIVO):
+        print("Nenhum produto cadastrado.")
+        return
+
+    nome_excluir = input("Digite o nome do produto que deseja excluir.").strip()
+
+    if not nome_excluir:
+        print("Nome inválido.")
+        return
+
+    if not nome_excluir.replace(" ", "").isalpha():
+        print("Nome inválido. Digite apenas letras.")
+        return
+
+    try:
+        produtos = []
+        encontrado = False
+
+        with open(ARQUIVO, "r", encoding="utf-8") as arquivo:
+            for linha in arquivo:
+
+                linha = linha.strip()
+
+                if not linha:
+                    continue
+
+                dados = linha.split(";")
+
+                if len(dados) != 3:
+                    print("Existe uma linha inválida no arquivo!")
+                    return
+
+                nome, preco, quantidade = dados
+
+                if nome.lower() == nome_excluir.lower():
+                    encontrado = True
+                    continue
+
+                produtos.append(linha)
+
+            if not encontrado:
+                print("Produto não encontrado.")
+                return
+
+            with open(ARQUIVO, "w", encoding = "utf-8") as arquivo:
+                for produto in produtos:
+                    arquivo.write(produto + "\n")
+
+            print(" === PRODUTO EXCLUÍDO ===")
+            print("Produto excluído com sucesso!")
+
+    except OSError:
+        print("Não foi possível excluir o produto")
