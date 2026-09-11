@@ -1,0 +1,3 @@
+Bermuda;30.50;3
+Calça;43.50;10
+exu aminae;30.20;2

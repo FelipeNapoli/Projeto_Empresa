@@ -130,3 +130,4 @@ def listar_produto():
     except (OSError, ValueError):
         print("Não foi possível ler os produtos cadastrados.")
 
+def excluir_produto():
