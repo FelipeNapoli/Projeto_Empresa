@@ -111,8 +111,16 @@ def listar_clientes():
     try:
         if os.path.exists(arquivo):
             with open(arquivo, "r", encoding = "utf-8") as txt:
-                pass
-            
+                clientes = txt.readlines()
+
+            clientes.sort()
+
+            for cliente in clientes:
+                dados = cliente.strip().split(";")
+                nome = dados[0]
+                email = dados[1]
+                telefone = dados[2]
+
         else:
             raise FileNotFoundError
         
