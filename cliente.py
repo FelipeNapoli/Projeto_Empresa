@@ -93,7 +93,7 @@ def cadastro_cliente():
             )
 
     with open(arquivo, "a", encoding="utf-8") as txt:
-        txt.write(f"{nome};{email};{telefone}\n")
+        txt.write(f"{nome.title()};{email};{telefone}\n")
 
     print()
     print()
@@ -157,7 +157,7 @@ def listar_clientes():
         
     except FileNotFoundError:
         print(Panel(
-            "Nenhum Cliente Cadastrado",
+            "[dark_red]Nenhum Cliente Cadastrado[/]",
             expand = False,
             title_align= "center",
             border_style= "red",
@@ -208,16 +208,64 @@ def excluir_cliente():
 
         print(tabela)
         print()
-        
 
+        if os.path.exists(arquivo):
+            dados = []
+            with open(arquivo, "r", encoding= "utf-8") as txt:
+                dados = txt.readlines()
+
+        else:
+            raise FileNotFoundError
+
+        while True:
+            try:
+                nome = input("Digite o nome do aluno para excluí-lo: ").strip().title()
+
+                if not nome.replace(" ", "").isalpha():
+
+                    raise NameError
+
+                else:
+                    for n in dados:
+                        if n.startswith(nome + ";"):
+                            break
+
+                    else:
+                        print("caiu")
+                        raise NameError
+
+                    break
+
+            except NameError:
+                print(Panel(
+                    "[dark_red]Aluno não encontrado[/]",
+                    expand = False,
+                    title_align= "center",
+                    border_style= "red",
+                    width = 80
+                    ))
+
+        with open(arquivo, "w", encoding = "utf-8") as txt:
+            for n in dados:
+                if not n.startswith(nome + ";"):
+                    txt.write(n)
+
+        print()
+        print()
+        print(
+            Panel(
+                "Cliente Excluido com Sucesso", 
+                expand= False,
+                title_align="center",
+                border_style="green3"
+            )
+        )
+                
     except FileNotFoundError:
         print(Panel(
-            "Nenhum Cliente Cadastrado",
+            "[dark_red]Nenhum Cliente Cadastrado[/]",
             expand = False,
             title_align= "center",
             border_style= "red",
             width = 80
         ))
-
-listar_clientes()
-excluir_cliente()
