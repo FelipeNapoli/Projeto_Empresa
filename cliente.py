@@ -107,5 +107,23 @@ def cadastro_cliente():
     )
     print(f"\n [orange1]Nome:[/] {nome}\n\n [orange1]Email:[/] {email}\n\n [orange1]Telefone:[/] {telefone}")
 
+def listar_clientes():
+    try:
+        if os.path.exists(arquivo):
+            with open(arquivo, "r", encoding = "utf-8") as txt:
+                pass
+            
+        else:
+            raise FileNotFoundError
+        
+    except FileNotFoundError:
+        print(Panel(
+            "Nenhum Cliente Cadastrado",
+            expand = False,
+            title_align= "center",
+            border_style= "red"
+
+        ))
+        
 
 cadastro_cliente()
