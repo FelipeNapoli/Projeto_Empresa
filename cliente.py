@@ -270,5 +270,3 @@ def excluir_cliente():
             border_style= "red",
             width = 80
         ))
-
-cadastro_cliente()
