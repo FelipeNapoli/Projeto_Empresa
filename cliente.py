@@ -2,6 +2,7 @@ from rich import print
 from rich.panel import Panel
 from rich.table import Table
 from rich import box
+import os
 
 arquivo = "clientes.txt"
 
@@ -90,16 +91,17 @@ def cadastro_cliente():
                 border_style="red"
                 )
             )
-            print()
-            print()
-            print(
-                Panel(
-                    "Cliente Cadastrado com Sucesso", 
-                    expand= False,
-                    title_align="center",
-                    border_style="green3"
-                )
-            )
-            print(f"\n [orange1]Nome:[/] {nome}\n\n [orange1]Email:[/] {email}\n\n [orange1]Telefone:[/] {telefone}")
-    
+
+    print()
+    print()
+    print(
+        Panel(
+            "Cliente Cadastrado com Sucesso", 
+            expand= False,
+            title_align="center",
+            border_style="green3"
+        )
+    )
+    print(f"\n [orange1]Nome:[/] {nome}\n\n [orange1]Email:[/] {email}\n\n [orange1]Telefone:[/] {telefone}")
+
 cadastro_cliente()
