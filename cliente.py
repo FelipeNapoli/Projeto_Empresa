@@ -53,6 +53,9 @@ def cadastro_cliente():
             if not "@" in email:
                 raise ValueError
 
+            elif " " in email:
+                raise ValueError
+
             else:
                 break
 
@@ -272,4 +275,3 @@ def excluir_cliente():
             border_style= "red",
             width = 80
         ))
-
