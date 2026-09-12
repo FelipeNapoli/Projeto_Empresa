@@ -34,13 +34,14 @@ def cadastro_cliente():
         except ValueError:
             print()
             print(Panel(
-                "[dark_red]Nome Inválido[/]", 
-                box=box.HORIZONTALS, 
-                expand=False, 
-                padding=(0, 2),
-                border_style="red"
+                "[bright_red]Nome Inválido![/]", 
+                box=box.ROUNDED, 
+                expand = False, 
+                width = 80,
+                border_style="red",
                 )
             )
+            print()
             print()
 
     print()
@@ -58,13 +59,13 @@ def cadastro_cliente():
         except ValueError:
             print()
             print(Panel(
-                "[dark_red]Email Inválido[/]", 
-                box=box.HORIZONTALS, 
+                "[bright_red]Email Inválido![/]",  
                 expand=False, 
-                padding=(0, 2),
-                border_style="red"
+                width = 80,
+                border_style="red",
                 )
             )
+            print()
             print()
 
     print()        
@@ -86,22 +87,23 @@ def cadastro_cliente():
         except ValueError:
             print()
             print(Panel(
-                "[dark_red]Telefone Inválido[/]", 
-                box=box.HORIZONTALS, 
+                "[bright_red]Telefone Inválido[/]",  
                 expand=False, 
-                padding=(0, 2),
+                width = 80,
                 border_style="red"
                 )
             )
+            print()
+            print()
 
     with open(arquivo, "a", encoding="utf-8") as txt:
-        txt.write(f"{nome.title()};{email.lower()};{telefone}\n")
+        txt.write(f"{nome};{email};{telefone}\n")
 
     print()
     print()
     print(
         Panel(
-            "Cliente Cadastrado com Sucesso", 
+            "[bright_green]Cliente Cadastrado com Sucesso[/]", 
             expand= False,
             title_align="center",
             border_style="green3"
@@ -159,7 +161,7 @@ def listar_clientes():
         
     except FileNotFoundError:
         print(Panel(
-            "[dark_red]Nenhum Cliente Cadastrado[/]",
+            "[bright_red]Nenhum Cliente Cadastrado[/]",
             expand = False,
             title_align= "center",
             border_style= "red",
@@ -221,7 +223,7 @@ def excluir_cliente():
 
         while True:
             try:
-                nome = input("Digite o nome do aluno para excluí-lo: ").strip().title()
+                nome = input("Digite o nome do cliente para excluí-lo: ").strip().title()
 
                 if not nome.replace(" ", "").isalpha():
 
@@ -239,7 +241,7 @@ def excluir_cliente():
 
             except NameError:
                 print(Panel(
-                    "[dark_red]Aluno não encontrado[/]",
+                    "[bright_red]Cliente não encontrado[/]",
                     expand = False,
                     title_align= "center",
                     border_style= "red",
@@ -255,7 +257,7 @@ def excluir_cliente():
         print()
         print(
             Panel(
-                "Cliente Excluido com Sucesso", 
+                "[bright_green]Cliente Excluido com Sucesso[/]", 
                 expand= False,
                 title_align="center",
                 border_style="green3"
@@ -264,9 +266,10 @@ def excluir_cliente():
                 
     except FileNotFoundError:
         print(Panel(
-            "[dark_red]Nenhum Cliente Cadastrado[/]",
+            "[bright_red]Nenhum Cliente Cadastrado[/]",
             expand = False,
             title_align= "center",
             border_style= "red",
             width = 80
         ))
+
