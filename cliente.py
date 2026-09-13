@@ -176,99 +176,98 @@ def listar_clientes():
 
 def excluir_cliente():
     try:
-        print()
-        print()
-        print(Panel(
-            "EXCLUIR CLIENTES",
-            box = box.DOUBLE,
-            border_style = "bright_red",
-            width = 80,
-            padding = (0, 31)
-        ))
-
-        tabela = Table(
-            caption = "EMPRESA+",
-            caption_style= "dim italic #000a9b",
-            title_style = "bold white on dark_red",
-            border_style="bright_red",
-            box = box.ROUNDED,
-            style = "bright_red",
-            width = 80,
-            show_lines= True
-            )
-
-        tabela.add_column("NOME", justify = "center", style="bold white")
-        tabela.add_column("EMAIL", justify = "center", style="italic magenta")
-        tabela.add_column("TELEFONE", justify = "center", style="yellow")
-
         if os.path.exists(arquivo):
             with open(arquivo, "r", encoding = "utf-8") as txt:
                 clientes = txt.readlines()
 
-        clientes.sort()
+            if clientes:
+                clientes.sort()
 
-        for cliente in clientes:
-            dados = cliente.strip().split(";")
-            nome = dados[0]
-            email = dados[1]
-            telefone = dados[2]
+                print()
+                print()
+                print(Panel(
+                    "EXCLUIR CLIENTES",
+                    box = box.DOUBLE,
+                    border_style = "bright_red",
+                    width = 80,
+                    padding = (0, 31)
+                ))
 
-            tabela.add_row(nome, email, telefone)
+                tabela = Table(
+                    caption = "EMPRESA+",
+                    caption_style= "dim italic #000a9b",
+                    title_style = "bold white on dark_red",
+                    border_style="bright_red",
+                    box = box.ROUNDED,
+                    style = "bright_red",
+                    width = 80,
+                    show_lines= True
+                    )
 
-        print(tabela)
-        print()
+                tabela.add_column("NOME", justify = "center", style="bold white")
+                tabela.add_column("EMAIL", justify = "center", style="italic magenta")
+                tabela.add_column("TELEFONE", justify = "center", style="yellow")
 
-        if os.path.exists(arquivo):
+                for cliente in clientes:
+                    dados = cliente.strip().split(";")
+                    nome, email, telefone = dados
+
+                    tabela.add_row(nome, email, telefone)
+
+                print(tabela)
+                print()
+
+            else:
+                raise FileNotFoundError
+
+            
             dados = []
             with open(arquivo, "r", encoding= "utf-8") as txt:
                 dados = txt.readlines()
 
-        else:
-            raise FileNotFoundError
+            while True:
+                try:
+                    nome = input("Digite o nome do cliente para excluí-lo: ").strip().title()
 
-        while True:
-            try:
-                nome = input("Digite o nome do cliente para excluí-lo: ").strip().title()
+                    if not nome.replace(" ", "").isalpha():
 
-                if not nome.replace(" ", "").isalpha():
-
-                    raise NameError
-
-                else:
-                    for n in dados:
-                        if n.startswith(nome + ";"):
-                            break
-
-                    else:
                         raise NameError
 
-                    break
+                    else:
+                        for n in dados:
+                            if n.startswith(nome + ";"):
+                                break
 
-            except NameError:
-                print(Panel(
-                    "[bright_red]Cliente não encontrado[/]",
-                    expand = False,
-                    title_align= "center",
-                    border_style= "red",
-                    width = 80
-                    ))
+                        else:
+                            raise NameError
 
-        with open(arquivo, "w", encoding = "utf-8") as txt:
-            for n in dados:
-                if not n.startswith(nome + ";"):
-                    txt.write(n)
+                        break
 
-        print()
-        print()
-        print(
-            Panel(
-                "[bright_green]Cliente Excluido com Sucesso[/]", 
-                expand= False,
-                title_align="center",
-                border_style="green3"
+                except NameError:
+                    print(Panel(
+                        "[bright_red]Cliente não encontrado[/]",
+                        expand = False,
+                        title_align= "center",
+                        border_style= "red",
+                        width = 80
+                        ))
+
+            with open(arquivo, "w", encoding = "utf-8") as txt:
+                for n in dados:
+                    if not n.startswith(nome + ";"):
+                        txt.write(n)
+
+            print()
+            print()
+            print(
+                Panel(
+                    "[bright_green]Cliente Excluido com Sucesso[/]", 
+                    expand= False,
+                    title_align="center",
+                    border_style="green3"
+                )
             )
-        )
-                
+                    
     except FileNotFoundError:
         print(Panel(
             "[bright_red]Nenhum Cliente Cadastrado[/]",
