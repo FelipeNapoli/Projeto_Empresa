@@ -150,10 +150,8 @@ def listar_clientes():
 
             for cliente in clientes:
                 dados = cliente.strip().split(";")
-                nome = dados[0]
-                email = dados[1]
-                telefone = dados[2]
-
+                nome, email, telefone = dados
+ 
                 tabela.add_row(nome, email, telefone)
 
             print(tabela)
