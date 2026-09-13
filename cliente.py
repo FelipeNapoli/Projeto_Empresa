@@ -276,3 +276,33 @@ def excluir_cliente():
             border_style= "red",
             width = 80
         ))
+
+def menu_cliente():
+    while True:
+        print(
+            Panel(
+                "[bright_gray]CLIENTE[/]",
+                border_style = "cyan",
+                width = 40,
+                padding = (0, 15)
+            ))
+
+        print(Panel(
+"""
+[chartreuse1][ 1 ] Cadastrar Cliente[/]
+
+[royal_blue1][ 2 ] Listar Cliente[/]
+
+[indian_red1][ 3 ] Excluir Cliente[/]
+""",
+                box = box.ROUNDED,
+                border_style= "cyan",
+                padding= (1, 5),
+                width = 40,
+                title = "[bright_white]CADASTRO[/]",
+                subtitle = "[turquese1]Pressione 4 para sair[/]",
+                subtitle_align= "right",
+
+    ))
+
+        resp = input(" ")
