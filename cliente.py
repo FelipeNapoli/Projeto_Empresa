@@ -118,48 +118,51 @@ def cadastro_cliente():
 def listar_clientes():
     try:
         if os.path.exists(arquivo):
-
-            print()
-            print()
-            print(Panel(
-                "CLIENTES CADASTRADOS",
-                box = box.DOUBLE,
-                border_style = "bright_blue",
-                width = 80,
-                padding = (0, 29)
-            ))
-
-            tabela = Table(
-                caption = "EMPRESA+",
-                caption_style= "dim italic #000a9b",
-                title_style = "bold white on dark_blue",
-                border_style="bright_blue",
-                box = box.ROUNDED,
-                style = "cyan",
-                width = 80,
-                show_lines= True
-                )
-
-            tabela.add_column("NOME", justify = "center", style="bold white")
-            tabela.add_column("EMAIL", justify = "center", style="italic magenta")
-            tabela.add_column("TELEFONE", justify = "center", style="yellow")
-
             with open(arquivo, "r", encoding = "utf-8") as txt:
                 clientes = txt.readlines()
 
-            clientes.sort()
+            if clientes:   
+                clientes.sort()
 
-            for cliente in clientes:
-                dados = cliente.strip().split(";")
-                nome, email, telefone = dados
+                print()
+                print()
+                print(Panel(
+                    "CLIENTES CADASTRADOS",
+                    box = box.DOUBLE,
+                    border_style = "bright_blue",
+                    width = 80,
+                    padding = (0, 29)
+                ))
+
+                tabela = Table(
+                    caption = "EMPRESA+",
+                    caption_style= "dim italic #000a9b",
+                    title_style = "bold white on dark_blue",
+                    border_style="bright_blue",
+                    box = box.ROUNDED,
+                    style = "cyan",
+                    width = 80,
+                    show_lines= True
+                )
+
+                tabela.add_column("NOME", justify = "center", style="bold white")
+                tabela.add_column("EMAIL", justify = "center", style="italic magenta")
+                tabela.add_column("TELEFONE", justify = "center", style="yellow")
+
+                for cliente in clientes:
+                    dados = cliente.strip().split(";")
+                    nome, email, telefone = dados
 
                 tabela.add_row(nome, email, telefone)
 
-            print(tabela)
-            print()
+                print(tabela)
+                print()
+
+            else:
+                raise FileNotFoundError
 
         else:
-            raise ValueError
+            raise FileNotFoundError
             
     except FileNotFoundError:
         print(Panel(
