@@ -302,7 +302,7 @@ def menu_cliente():
                     padding= (1, 5),
                     width = 40,
                     title = "[bright_white]CADASTRO[/]",
-                    subtitle = "[turquese1]Pressione 4 para sair[/]",
+                    subtitle = "[turquese1]Pressione 4 para voltar[/]",
                     subtitle_align= "right",
 
         ))
