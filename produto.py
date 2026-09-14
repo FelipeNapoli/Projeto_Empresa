@@ -312,7 +312,7 @@ def excluir_produto():
             ))
             break
         
-def menu_cliente():
+def menu_produto():
     while True:
         try:
             print(
@@ -374,4 +374,3 @@ def menu_cliente():
             print()
 
         
-menu_cliente()
