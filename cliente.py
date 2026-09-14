@@ -279,30 +279,61 @@ def excluir_cliente():
 
 def menu_cliente():
     while True:
-        print(
-            Panel(
-                "[bright_gray]CLIENTE[/]",
-                border_style = "cyan",
-                width = 40,
-                padding = (0, 15)
-            ))
+        try:
+            print(
+                Panel(
+                    "[bright_gray]CLIENTE[/]",
+                    border_style = "cyan",
+                    width = 40,
+                    padding = (0, 15)
+                ))
+            print()
+            
+            print(Panel(
+    """
+    [chartreuse1][ 1 ] Cadastrar Cliente[/]
 
-        print(Panel(
-"""
-[chartreuse1][ 1 ] Cadastrar Cliente[/]
+    [royal_blue1][ 2 ] Listar Cliente[/]
 
-[royal_blue1][ 2 ] Listar Cliente[/]
+    [indian_red1][ 3 ] Excluir Cliente[/]
+    """,
+                    box = box.ROUNDED,
+                    border_style= "cyan",
+                    padding= (1, 5),
+                    width = 40,
+                    title = "[bright_white]CADASTRO[/]",
+                    subtitle = "[turquese1]Pressione 4 para sair[/]",
+                    subtitle_align= "right",
 
-[indian_red1][ 3 ] Excluir Cliente[/]
-""",
-                box = box.ROUNDED,
-                border_style= "cyan",
-                padding= (1, 5),
-                width = 40,
-                title = "[bright_white]CADASTRO[/]",
-                subtitle = "[turquese1]Pressione 4 para sair[/]",
-                subtitle_align= "right",
+        ))
 
-    ))
+            resp = int(input())
 
-        resp = input(" ")
+            match resp:
+                case 1:
+                    cadastro_cliente()
+
+                case 2:
+                    listar_clientes()
+
+                case 3:
+                    excluir_cliente()
+
+                case 4:
+                    break
+
+                case _:
+                    raise ValueError
+
+        except ValueError:
+            print()
+            print(Panel(
+                "[bright_red]Opção Inválida![/]", 
+                box=box.ROUNDED, 
+                expand = False, 
+                width = 80,
+                border_style="red",
+                )
+            )
+            print()
+            print()

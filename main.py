@@ -35,7 +35,9 @@ while True:
 
         match resp:
             case 1:
-                pass
+                print()
+                menu_produto()
+                print()
             case 2:
                 print()
                 menu_cliente()
