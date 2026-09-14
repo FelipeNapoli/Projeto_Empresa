@@ -153,7 +153,7 @@ def listar_clientes():
                     dados = cliente.strip().split(";")
                     nome, email, telefone = dados
 
-                tabela.add_row(nome, email, telefone)
+                    tabela.add_row(nome, email, telefone)
 
                 print(tabela)
                 print()
